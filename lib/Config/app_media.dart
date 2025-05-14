@@ -6,7 +6,7 @@ class AppIcons {
   static const String figma = "assets/icons/figma.png";
   static const String firebase = "assets/icons/firebase.png";
   static const String flutter = "assets/icons/flutter.png";
-  static const String github = "assets/icons/github.png";
+  static const String githubwhite = "assets/icons/github.png";
   static const String html5 = "assets/icons/html5.png";
   static const String javascript = "assets/icons/javascript.png";
   static const String expressjs = "assets/icons/js.png";
@@ -15,15 +15,19 @@ class AppIcons {
   static const String restapi = "assets/icons/rest-api.png";
   static const String playstore = "assets/icons/playstore.png";
   static const String applestore = "assets/icons/apple.png";
+  static const String homeblack = "assets/icons/home.png";
+  static const String userblack = "assets/icons/user.png";
+  static const String projects = "assets/icons/projects.png";
+  static const String techblack = "assets/icons/coding.png";
+  static const String contact = "assets/icons/contact.png";
+  static const String linkedin = "assets/icons/linkedin.png";
+  static const String githubblack = "assets/icons/githubblack.png";
+  static const String whatsapp = "assets/icons/whatsapp.png";
 }
 
 class AppImages {
   static const String workpal1 = "assets/images/workpal-1.png";
-  static const String workpal2 = "assets/images/workpal-2.png";
   static const String mul1 = "assets/images/mul1.png";
-  static const String mul2 = "assets/images/mul2.png";
   static const String sld1 = "assets/images/sld1.png";
-  static const String sld2 = "assets/images/sld2.png";
   static const String apportion1 = "assets/images/apportion1.png";
-  static const String apportion2 = "assets/images/apportion2.png";
 }

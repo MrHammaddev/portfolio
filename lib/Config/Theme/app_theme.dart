@@ -12,6 +12,9 @@ class Themes {
     cardColor: AppColors().whiteLight,
     secondaryHeaderColor: Color(0xffF1F2F5),
     shadowColor: AppColors().darkColor.withOpacity(0.2),
+    iconTheme: IconThemeData(
+      color: AppColors().darkColor,
+    ),
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
@@ -77,6 +80,9 @@ class Themes {
     cardColor: AppColors().whiteDark,
     secondaryHeaderColor: Color(0xff2D2E2F),
     shadowColor: Colors.black,
+    iconTheme: IconThemeData(
+      color: AppColors().whiteLight,
+    ),
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light, // For Android (dark icons)

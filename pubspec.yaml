@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  device_preview: ^1.2.0
+  # device_preview: ^1.2.0
   get: ^4.7.2
   get_storage: ^2.1.1
   avatar_glow: ^3.0.1

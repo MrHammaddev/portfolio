@@ -32,7 +32,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: simpleAppBarWidget(context, "title"),
+      // appBar: simpleAppBarWidget(context, "title"),
       body: Row(
         children: [
           // Static Non-Scrollable Container
@@ -71,6 +71,85 @@ class _HomeDesktopState extends State<HomeDesktop> {
                   SizedBox(
                     height: 15,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          final Uri url = Uri.parse(
+                              "https://www.linkedin.com/in/malik-hammad-");
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          } else {
+                            Get.snackbar(
+                              "Error",
+                              "An error occurred. Please try again.",
+                              icon: Icon(
+                                Icons.error,
+                                color: Colors.white,
+                              ),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 255, 112, 102),
+                              colorText: Colors.white,
+                              duration: Duration(seconds: 3),
+                              snackPosition: SnackPosition.BOTTOM,
+                              borderRadius: 10,
+                              margin: EdgeInsets.all(10),
+                              borderColor: Colors.red,
+                              borderWidth: 2,
+                              maxWidth: 300,
+                            );
+                          }
+                        },
+                        child: Image.asset(
+                          AppIcons.linkedin,
+                          height: 25,
+                          width: 25,
+                          color: context.theme.iconTheme.color,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          final Uri url =
+                              Uri.parse("https://github.com/MrHammaddev");
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          } else {
+                            Get.snackbar(
+                              "Error",
+                              "An error occurred. Please try again.",
+                              icon: Icon(
+                                Icons.error,
+                                color: Colors.white,
+                              ),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 255, 112, 102),
+                              colorText: Colors.white,
+                              duration: Duration(seconds: 3),
+                              snackPosition: SnackPosition.BOTTOM,
+                              borderRadius: 10,
+                              margin: EdgeInsets.all(10),
+                              borderColor: Colors.red,
+                              borderWidth: 2,
+                              maxWidth: 300,
+                            );
+                          }
+                        },
+                        child: Image.asset(
+                          AppIcons.githubblack,
+                          height: 25,
+                          width: 25,
+                          color: context.theme.iconTheme.color,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Divider(),
                   SizedBox(
                     height: 12,
@@ -105,26 +184,6 @@ class _HomeDesktopState extends State<HomeDesktop> {
                       ),
                       Text(
                         "hamad.aslam7889@gmail.com",
-                        style: TextStyle(
-                            color: context.theme.textTheme.labelLarge!.color,
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Age:",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "25",
                         style: TextStyle(
                             color: context.theme.textTheme.labelLarge!.color,
                             fontSize: 18,
@@ -189,25 +248,46 @@ class _HomeDesktopState extends State<HomeDesktop> {
           Expanded(
             child: SingleChildScrollView(
               controller: scrollController,
-              // physics: AlwaysScrollableScrollPhysics(
-              //     parent: BouncingScrollPhysics()),
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
                 child: Column(
-                  children: List.generate(
-                    sectionsListTitle.length,
-                    (index) => Container(
-                        key: sectionKeys[index],
-                        // height: 150,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                        margin: EdgeInsets.only(bottom: 40),
-                        decoration: BoxDecoration(
-                            color: context.theme.cardColor,
-                            borderRadius: BorderRadius.circular(25)),
-                        child: _buildContainerContent(index)),
-                  ),
+                  children: [
+                    Column(
+                      children: List.generate(
+                        sectionsListTitle.length,
+                        (index) => Container(
+                            key: sectionKeys[index],
+                            // height: 150,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 50),
+                            margin: EdgeInsets.only(bottom: 40),
+                            decoration: BoxDecoration(
+                                color: context.theme.cardColor,
+                                borderRadius: BorderRadius.circular(25)),
+                            child: _buildContainerContent(index)),
+                      ),
+                    ),
+                    Container(
+                      width: kWidth(context),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: context.theme.cardColor,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "© 2025 Malik Hammad",
+                          style: TextStyle(
+                            color: context.theme.textTheme.labelLarge!.color,
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -229,7 +309,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
-                sectionsListTitle.length,
+                navIcons.length,
                 (index) => MouseRegion(
                   onEnter: (_) {
                     setState(() {
@@ -242,9 +322,9 @@ class _HomeDesktopState extends State<HomeDesktop> {
                     });
                   },
                   child: Tooltip(
-                    message: sectionsListTitle[index], // Tooltip message
-                    preferBelow: true, // Show tooltip above or to the side
-                    verticalOffset: 30, // Adjust vertical offset
+                    message: sectionsListTitle[index],
+                    preferBelow: true,
+                    verticalOffset: 30,
                     decoration: BoxDecoration(
                       color: context.theme.cardColor,
                       borderRadius: BorderRadius.circular(10),
@@ -284,7 +364,12 @@ class _HomeDesktopState extends State<HomeDesktop> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 20, horizontal: 20),
-                            child: Icon(Icons.home),
+                            child: Image.asset(
+                              navIcons[index],
+                              color: context.theme.iconTheme.color,
+                              height: 20,
+                              width: 20,
+                            ),
                           )),
                     ),
                   ),
@@ -339,7 +424,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HeadingName(title: "Introduce"),
+            HeadingName(title: "Introduce", icn: AppIcons.homeblack),
             SizedBox(
               height: 30,
             ),
@@ -398,19 +483,19 @@ class _HomeDesktopState extends State<HomeDesktop> {
             ),
             Row(
               children: [
-                // Center(
-                //   child: AvatarGlow(
-                //     glowRadiusFactor: 0.4,
-                //     glowColor: context.theme.primaryColor.withOpacity(0.3),
-                //     duration: Duration(milliseconds: 1000),
-                //     repeat: true,
-                //     curve: Curves.easeOutQuad,
-                //     child: Icon(
-                //       Icons.circle,
-                //       color: context.theme.primaryColor,
-                //     ),
-                //   ),
-                // ),
+                Center(
+                  child: AvatarGlow(
+                    glowRadiusFactor: 0.4,
+                    glowColor: context.theme.primaryColor.withOpacity(0.3),
+                    duration: Duration(milliseconds: 1000),
+                    repeat: true,
+                    curve: Curves.easeOutQuad,
+                    child: Icon(
+                      Icons.circle,
+                      color: context.theme.primaryColor,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: 15,
                 ),
@@ -424,19 +509,50 @@ class _HomeDesktopState extends State<HomeDesktop> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              width: 200,
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-              decoration: BoxDecoration(
-                  color: context.theme.primaryColor,
-                  borderRadius: BorderRadius.circular(35)),
-              child: Center(
-                child: Text(
-                  "Hire Me",
-                  style: TextStyle(
+            GestureDetector(
+              onTap: () async {
+                final Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: 'hamad.aslam7889@gmail.com',
+                  query: 'subject=Hello&body=Hi Malik Hammad,',
+                );
+                if (await canLaunchUrl(emailUri)) {
+                  await launchUrl(emailUri,
+                      mode: LaunchMode.externalApplication);
+                } else {
+                  Get.snackbar(
+                    "Error",
+                    "An error occurred. Please try again.",
+                    icon: Icon(
+                      Icons.error,
                       color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500),
+                    ),
+                    backgroundColor: const Color.fromARGB(255, 255, 112, 102),
+                    colorText: Colors.white,
+                    duration: Duration(seconds: 3),
+                    snackPosition: SnackPosition.BOTTOM,
+                    borderRadius: 10,
+                    margin: EdgeInsets.all(10),
+                    borderColor: Colors.red,
+                    borderWidth: 2,
+                    maxWidth: 300,
+                  );
+                }
+              },
+              child: Container(
+                width: 200,
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                decoration: BoxDecoration(
+                    color: context.theme.primaryColor,
+                    borderRadius: BorderRadius.circular(35)),
+                child: Center(
+                  child: Text(
+                    "Hire Me",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ),
@@ -446,30 +562,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-              decoration: BoxDecoration(
-                border:
-                    Border.all(color: context.theme.primaryColor, width: 0.5),
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.transparent,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.person_2_outlined,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "ABOUT ME",
-                    style: context.theme.textTheme.bodySmall,
-                  )
-                ],
-              ),
-            ),
+            HeadingName(title: "About me", icn: AppIcons.userblack),
             SizedBox(
               height: 30,
             ),
@@ -609,91 +702,16 @@ class _HomeDesktopState extends State<HomeDesktop> {
                 )
               ],
             )
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     Container(
-            //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            //       decoration: BoxDecoration(
-            //         border: Border.all(
-            //             color: context.theme.primaryColor, width: 0.5),
-            //         borderRadius: BorderRadius.circular(25),
-            //         color: Colors.transparent,
-            //       ),
-            //       child: Text(
-            //         "Flutter (95%)",
-            //         style: context.theme.textTheme.bodyLarge!
-            //             .merge(TextStyle(fontWeight: FontWeight.normal)),
-            //       ),
-            //     ),
-            //     Container(
-            //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            //       decoration: BoxDecoration(
-            //         border: Border.all(
-            //             color: context.theme.primaryColor, width: 0.5),
-            //         borderRadius: BorderRadius.circular(25),
-            //         color: Colors.transparent,
-            //       ),
-            //       child: Text(
-            //         "Dart (90%)",
-            //         style: context.theme.textTheme.bodyLarge!
-            //             .merge(TextStyle(fontWeight: FontWeight.normal)),
-            //       ),
-            //     ),
-            //     Container(
-            //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            //       decoration: BoxDecoration(
-            //         border: Border.all(
-            //             color: context.theme.primaryColor, width: 0.5),
-            //         borderRadius: BorderRadius.circular(25),
-            //         color: Colors.transparent,
-            //       ),
-            //       child: Text(
-            //         "Firebase (75%)",
-            //         style: context.theme.textTheme.bodyLarge!
-            //             .merge(TextStyle(fontWeight: FontWeight.normal)),
-            //       ),
-            //     ),
-            //     Container(
-            //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            //       decoration: BoxDecoration(
-            //         border: Border.all(
-            //             color: context.theme.primaryColor, width: 0.5),
-            //         borderRadius: BorderRadius.circular(25),
-            //         color: Colors.transparent,
-            //       ),
-            //       child: Text(
-            //         "Web Applications (80%)",
-            //         style: context.theme.textTheme.bodyLarge!
-            //             .merge(TextStyle(fontWeight: FontWeight.normal)),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // SizedBox(
-            //   height: 40,
-            // ),
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     Text("Email: ",
-            //         style:
-            //             TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
-            //     SizedBox(
-            //       width: 10,
-            //     ),
-            //     Text("hamad.aslam7889@gmail.com",
-            //         style:
-            //             TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
-            //   ],
-            // )
           ],
         );
       case 2:
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HeadingName(title: "Tech Stack"),
+            HeadingName(
+              title: "Tech Stack",
+              icn: AppIcons.techblack,
+            ),
             SizedBox(
               height: 30,
             ),
@@ -796,7 +814,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
             ),
             Row(
               children: [
-                techstackButton("Github", AppIcons.github),
+                techstackButton("Github", AppIcons.githubwhite),
               ],
             ),
             SizedBox(
@@ -821,117 +839,297 @@ class _HomeDesktopState extends State<HomeDesktop> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HeadingName(title: "Projects"),
+            HeadingName(
+              title: "Projects",
+              icn: AppIcons.projects,
+            ),
             SizedBox(
               height: 30,
             ),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:
-                      MediaQuery.of(context).size.width > 800 ? 3 : 2,
+            LayoutBuilder(builder: (context, constraints) {
+              final width = constraints.maxWidth;
+              final height = constraints.maxHeight;
+              final itemHeight = 300.0;
+              final itemWidth = 300.0;
+
+              final crossCount = (width / itemWidth).floor();
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossCount,
+                  childAspectRatio: itemWidth / itemHeight,
                   crossAxisSpacing: 40,
                   mainAxisSpacing: 40,
-                  childAspectRatio: 1),
-              itemCount: projectImgs.length,
-              itemBuilder: (context, index) {
-                bool isHovering = false; // Track hover state for each container
-                return StatefulBuilder(
-                  builder: (context, setState) {
-                    return MouseRegion(
-                      onEnter: (_) {
-                        setState(() {
-                          isHovering = true;
-                        });
-                      },
-                      onExit: (_) {
-                        setState(() {
-                          isHovering = false;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration:
-                            Duration(milliseconds: 300), // Smooth transition
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        decoration: BoxDecoration(
-                          color: context.theme.cardColor,
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: isHovering
-                              ? [
-                                  BoxShadow(
-                                    color: context.theme.primaryColor
-                                        .withOpacity(0.5),
-                                    blurRadius: 15,
-                                    spreadRadius: 3,
-                                  ),
-                                ]
-                              : [
-                                  BoxShadow(
-                                    color: context.theme.shadowColor,
-                                    blurRadius: 4,
-                                    offset: Offset(2, 2),
-                                  ),
-                                ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(projectImgs[index]),
-                            // SizedBox(
-                            //   height: 15,
-                            // ),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 18),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      projectTitle[index],
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold),
+                ),
+                itemCount: projectImgs.length,
+                itemBuilder: (context, index) {
+                  bool isHovering =
+                      false; // Track hover state for each container
+                  return StatefulBuilder(
+                    builder: (context, setState) {
+                      return MouseRegion(
+                        onEnter: (_) {
+                          setState(() {
+                            isHovering = true;
+                          });
+                        },
+                        onExit: (_) {
+                          setState(() {
+                            isHovering = false;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration:
+                              Duration(milliseconds: 300), // Smooth transition
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          decoration: BoxDecoration(
+                            color: context.theme.cardColor,
+                            borderRadius: BorderRadius.circular(25),
+                            boxShadow: isHovering
+                                ? [
+                                    BoxShadow(
+                                      color: context.theme.primaryColor
+                                          .withOpacity(0.5),
+                                      blurRadius: 15,
+                                      spreadRadius: 3,
                                     ),
-                                    // SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        appLinkButton(
-                                            "Android",
-                                            AppIcons.playstore,
-                                            "https://play.google.com/store/apps/details?id=pk.gptech.workpal"),
-                                        SizedBox(
-                                          width: 6,
-                                        ),
-                                        appLinkButton(
-                                            "iOS",
-                                            AppIcons.applestore,
-                                            "https://apps.apple.com/cl/app/gptech-workpal/id6624304761?l=en-GB")
-                                      ],
-                                    )
+                                  ]
+                                : [
+                                    BoxShadow(
+                                      color: context.theme.shadowColor,
+                                      blurRadius: 4,
+                                      offset: Offset(2, 2),
+                                    ),
                                   ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(projectImgs[index]),
+                              // SizedBox(
+                              //   height: 15,
+                              // ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        projectTitle[index],
+                                        style: TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      // SizedBox(
+                                      //   height: 5,
+                                      // ),
+                                      // ListView.builder(
+                                      //   shrinkWrap: true,
+                                      //   physics: NeverScrollableScrollPhysics(),
+                                      //   itemCount: 2,
+                                      //   itemBuilder:
+                                      //       (BuildContext context, int index) {
+                                      //     return appLinkButton("title",
+                                      //         AppIcons.playstore, "url");
+                                      //   },
+                                      // ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          appLinkButton(
+                                              "Android",
+                                              AppIcons.playstore,
+                                              playstoreLinks[index]),
+                                          SizedBox(
+                                            width: 6,
+                                          ),
+                                          appLinkButton(
+                                              "iOS",
+                                              AppIcons.applestore,
+                                              appstoreLinks[index]),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+                      );
+                    },
+                  );
+                },
+              );
+            }),
           ],
         );
       case 4:
-        return Container();
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HeadingName(title: "Contact us", icn: AppIcons.contact),
+            SizedBox(
+              height: 30,
+            ),
+            RichText(
+                text: TextSpan(
+                    text: "Get in Touch",
+                    style: context.theme.textTheme.displayLarge!.merge(
+                        TextStyle(
+                            fontSize: 45,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 1.3)),
+                    children: [
+                  TextSpan(
+                      text: " with me",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 45,
+                          color: context.theme.primaryColor)),
+                ])),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+                "I’m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
+                style: context.theme.textTheme.bodyLarge!.merge(TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 1.3))),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () async {
+                final Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: 'hamad.aslam7889@gmail.com',
+                  query:
+                      'subject=Hello&body=Hi Malik Hammad,', // Optional query parameters
+                );
+                if (await canLaunchUrl(emailUri)) {
+                  await launchUrl(emailUri,
+                      mode: LaunchMode.externalApplication);
+                } else {
+                  Get.snackbar(
+                    "Error",
+                    "An error occurred. Please try again.",
+                    icon: Icon(
+                      Icons.error,
+                      color: Colors.white,
+                    ),
+                    backgroundColor: const Color.fromARGB(255, 255, 112, 102),
+                    colorText: Colors.white,
+                    duration: Duration(seconds: 3),
+                    snackPosition: SnackPosition.BOTTOM,
+                    borderRadius: 10,
+                    margin: EdgeInsets.all(10),
+                    borderColor: Colors.red,
+                    borderWidth: 2,
+                    maxWidth: 300,
+                  );
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                decoration: BoxDecoration(
+                  color: context.theme.scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.email_rounded,
+                      color: context.theme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text("hamad.aslam7889@gmail.com"),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: context.theme.primaryColor,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () async {
+                try {
+                  final Uri whatsappUri = Uri.parse(
+                      "https://wa.me/923334334116?text=Hi Malik Hammad, I would like to connect with you.");
+                  if (await canLaunchUrl(whatsappUri)) {
+                    await launchUrl(whatsappUri,
+                        mode: LaunchMode.externalApplication);
+                  } else {
+                    throw 'Could not launch $whatsappUri';
+                  }
+                } catch (e) {
+                  Get.snackbar(
+                    "Error",
+                    "An error occurred. Please try again.",
+                    icon: Icon(
+                      Icons.error,
+                      color: Colors.white,
+                    ),
+                    backgroundColor: const Color.fromARGB(255, 255, 112, 102),
+                    colorText: Colors.white,
+                    duration: Duration(seconds: 3),
+                    snackPosition: SnackPosition.BOTTOM,
+                    borderRadius: 10,
+                    margin: EdgeInsets.all(10),
+                    borderColor: Colors.red,
+                    borderWidth: 2,
+                    maxWidth: 300,
+                  );
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                decoration: BoxDecoration(
+                  color: context.theme.scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(AppIcons.whatsapp,
+                        height: 20,
+                        width: 20,
+                        color: context.theme.primaryColor),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text("+92 333 4334116"),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: context.theme.primaryColor,
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        );
       default:
         return Container();
     }
@@ -945,11 +1143,26 @@ class _HomeDesktopState extends State<HomeDesktop> {
           await launchUrl(
             uri,
             mode: LaunchMode
-                .externalApplication, // Opens in a new tab or external browser
+                .inAppBrowserView, // Opens in a new tab or external browser
           );
         } else {
-          // Handle the error if the URL cannot be launched
-          print("Could not launch $url");
+          Get.snackbar(
+            "Error",
+            "An error occurred. Please try again.",
+            icon: Icon(
+              Icons.error,
+              color: Colors.white,
+            ),
+            backgroundColor: const Color.fromARGB(255, 255, 112, 102),
+            colorText: Colors.white,
+            duration: Duration(seconds: 3),
+            snackPosition: SnackPosition.BOTTOM,
+            borderRadius: 10,
+            margin: EdgeInsets.all(10),
+            borderColor: Colors.red,
+            borderWidth: 2,
+            maxWidth: 300,
+          );
         }
       },
       child: Container(
@@ -1014,8 +1227,9 @@ class _HomeDesktopState extends State<HomeDesktop> {
 }
 
 class HeadingName extends StatelessWidget {
-  const HeadingName({super.key, required this.title});
+  const HeadingName({super.key, required this.title, required this.icn});
   final String title;
+  final String icn;
 
   @override
   Widget build(BuildContext context) {
@@ -1029,11 +1243,14 @@ class HeadingName extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            Icons.home,
+          Image.asset(
+            icn,
+            color: context.theme.iconTheme.color,
+            height: 18,
+            width: 18,
           ),
           SizedBox(
-            width: 5,
+            width: 8,
           ),
           Text(
             title.toUpperCase(),

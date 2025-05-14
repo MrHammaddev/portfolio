@@ -12,9 +12,7 @@ double kHeight(BuildContext context) {
 var sectionsListTitle = [
   "Home",
   "About",
-  "Services",
-  "Skills",
-  "Resume",
+  "Technologies",
   "Projects",
   "Contact",
 ];
@@ -34,4 +32,26 @@ var projectTitle = [
   "Minhaj University Lahore",
   "Super Law Data System",
   "Apportion Relief Foundation"
+];
+
+var navIcons = [
+  AppIcons.homeblack,
+  AppIcons.userblack,
+  AppIcons.techblack,
+  AppIcons.projects,
+  AppIcons.contact,
+];
+
+var playstoreLinks = [
+  "https://play.google.com/store/apps/details?id=pk.gptech.workpal",
+  "https://play.google.com/store/apps/details?id=pk.edu.mul&hl=en",
+  "https://play.google.com/store/apps/details?id=com.sldsystem&hl=en",
+  "https://play.google.com/store/apps/details?id=pk.org.arf&hl=en",
+];
+
+var appstoreLinks = [
+  "https://apps.apple.com/cl/app/gptech-workpal/id6624304761?l=en-GB",
+  "https://apps.apple.com/cl/app/minhaj-university-lahore/id1561727840?l=en-GB",
+  "https://apps.apple.com/pk/app/sld-system/id6741755009",
+  "https://apps.apple.com/us/app/apportion-relief-foundation/id6447257655",
 ];
