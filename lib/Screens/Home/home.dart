@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Screens/Home/desktop.dart';
 import 'package:portfolio/Screens/Home/mobile.dart';
+import 'package:portfolio/Screens/Home/tablet.dart';
 import 'package:portfolio/responsive.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +14,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(mobile: HomeMobile(), desktop: HomeDesktop());
+    return Responsive(
+      mobile: HomeMobile(),
+      desktop: HomeDesktop(),
+      tablet: HomeTablet(),
+    );
   }
 }

@@ -1,81 +1,71 @@
+// import 'package:flutter/material.dart';
+
+// class ResponsiveLayout extends StatefulWidget {
+//   final Widget mobile;
+//   // final Widget? tablet;
+//   final Widget desktop;
+//   const ResponsiveLayout({
+//     super.key,
+//     required this.mobile,
+//     // this.tablet,
+//     required this.desktop,
+//   });
+
+//   @override
+//   _ResponsiveLayoutState createState() => _ResponsiveLayoutState();
+// }
+
+// class _ResponsiveLayoutState extends State<ResponsiveLayout> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return LayoutBuilder(
+//       builder: (context, constraints) {
+//         if (constraints.maxWidth >= 1280) {
+//           return widget.desktop;
+//         } else {
+//           return widget.mobile;
+//         }
+//       },
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 
-class ResponsiveLayout extends StatefulWidget {
+class Responsive extends StatelessWidget {
   final Widget mobile;
-  // final Widget? tablet;
+  final Widget tablet;
   final Widget desktop;
-  const ResponsiveLayout({
+  const Responsive({
     super.key,
     required this.mobile,
-    // this.tablet,
+    required this.tablet,
     required this.desktop,
   });
 
-  @override
-  _ResponsiveLayoutState createState() => _ResponsiveLayoutState();
-}
+  // screen sizes
+  static bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 600;
 
-class _ResponsiveLayoutState extends State<ResponsiveLayout> {
-  // final ScrollController _scrollController = ScrollController();
-  // final List<GlobalKey> _sectionKeys =
-  //     List.generate(10, (index) => GlobalKey());
+  static bool isTablet(BuildContext context) =>
+      MediaQuery.of(context).size.width < 1280 &&
+      MediaQuery.of(context).size.width >= 600;
 
-  // void _scrollToSection(int index) {
-  //   Scrollable.ensureVisible(
-  //     _sectionKeys[index].currentContext!,
-  //     duration: Duration(milliseconds: 500),
-  //     curve: Curves.easeInOut,
-  //   );
-  // }
+  static bool isDesktop(BuildContext context) =>
+      MediaQuery.of(context).size.width >= 1280;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth >= 1280) {
-          return widget.desktop;
+          return desktop;
+        } else if (constraints.maxWidth >= 600) {
+          return tablet;
         } else {
-          return widget.mobile;
+          return mobile;
         }
       },
     );
   }
 }
-
-// // ============================ DESKTOP VIEW ============================
-
-// class DesktopView extends StatelessWidget {
-//   final ScrollController scrollController;
-//   final List<GlobalKey> sectionKeys;
-//   final Function(int) scrollToSection;
-
-//   DesktopView({
-//     required this.scrollController,
-//     required this.sectionKeys,
-//     required this.scrollToSection,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return 
-//   }
-// }
-
-// // ============================ TABLET & MOBILE VIEW ============================
-
-// class TabletMobileView extends StatelessWidget {
-//   final ScrollController scrollController;
-//   final List<GlobalKey> sectionKeys;
-//   final Function(int) scrollToSection;
-
-//   TabletMobileView({
-//     required this.scrollController,
-//     required this.sectionKeys,
-//     required this.scrollToSection,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return 
-//   }
-// }

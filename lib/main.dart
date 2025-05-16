@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:portfolio/Screens/Home/home.dart';
 import 'Config/Theme/app_theme.dart';
 import 'Config/Theme/theme_service.dart';
+import 'Screens/Home/desktop.dart';
 
 void main() async {
   // runApp(
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // locale: DevicePreview.locale(context),
         // builder: DevicePreview.appBuilder,
-        theme: Themes.light,
+        theme: Themes.dark,
         darkTheme: Themes.dark,
         themeMode: ThemeService().theme,
         home: HomeScreen());
